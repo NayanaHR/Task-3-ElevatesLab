@@ -1,0 +1,118 @@
+mysql> USE LIBRARY_DB;
+Database changed
+mysql> select * FROM TRANSACTION;
++----------+---------+-----------+-------------+-------------+
+| trans_id | book_id | member_id | issued_date | return_date |
++----------+---------+-----------+-------------+-------------+
+|       51 |     101 |        22 | 2009-09-13  | NULL        |
+|       52 |     102 |        21 | 2009-09-13  | NULL        |
+|       54 |     104 |        25 | 2009-09-13  | NULL        |
++----------+---------+-----------+-------------+-------------+
+3 rows in set (0.03 sec)
+
+mysql> select * FROM BOOK;
++---------+------------+--------------+----------------+------------+---------+
+| book_id | book_title | author       | published_year | genre      | b_price |
++---------+------------+--------------+----------------+------------+---------+
+|     101 | DBMS       | Leelavathi   |           1999 | technology |     200 |
+|     102 | PYTHON     | Jagdeshchari |           1996 | technology |     250 |
+|     104 | CHMA       | AnandGope    |           1999 | technology |     100 |
++---------+------------+--------------+----------------+------------+---------+
+3 rows in set (0.01 sec)
+
+mysql> select * FROM MEMBER;
++-----------+---------+-------------------+------------+
+| member_id | name    | email             | join_date  |
++-----------+---------+-------------------+------------+
+|        21 | Shankar | shankar@gmail.com | 2009-09-12 |
+|        22 | NAYANA  | nayana@gmail.com  | 2009-09-12 |
+|        23 | HEMANTH | hemanth@gmail.com | 2010-09-22 |
+|        24 | POOJA   | pooja@gmail.com   | 2010-08-25 |
+|        25 | RAMYA   | ramya@gmail.com   | 2020-08-25 |
++-----------+---------+-------------------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM MEMBER
+    -> ORDER BY NAME DESC;
++-----------+---------+-------------------+------------+
+| member_id | name    | email             | join_date  |
++-----------+---------+-------------------+------------+
+|        21 | Shankar | shankar@gmail.com | 2009-09-12 |
+|        25 | RAMYA   | ramya@gmail.com   | 2020-08-25 |
+|        24 | POOJA   | pooja@gmail.com   | 2010-08-25 |
+|        22 | NAYANA  | nayana@gmail.com  | 2009-09-12 |
+|        23 | HEMANTH | hemanth@gmail.com | 2010-09-22 |
++-----------+---------+-------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM MEMBER
+    -> ORDER BY NAME;
++-----------+---------+-------------------+------------+
+| member_id | name    | email             | join_date  |
++-----------+---------+-------------------+------------+
+|        23 | HEMANTH | hemanth@gmail.com | 2010-09-22 |
+|        22 | NAYANA  | nayana@gmail.com  | 2009-09-12 |
+|        24 | POOJA   | pooja@gmail.com   | 2010-08-25 |
+|        25 | RAMYA   | ramya@gmail.com   | 2020-08-25 |
+|        21 | Shankar | shankar@gmail.com | 2009-09-12 |
++-----------+---------+-------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BOOK 
+    -> WHERE B_PRICE BETWEEN 100 AND 300;
++---------+------------+--------------+----------------+------------+---------+
+| book_id | book_title | author       | published_year | genre      | b_price |
++---------+------------+--------------+----------------+------------+---------+
+|     101 | DBMS       | Leelavathi   |           1999 | technology |     200 |
+|     102 | PYTHON     | Jagdeshchari |           1996 | technology |     250 |
+|     104 | CHMA       | AnandGope    |           1999 | technology |     100 |
++---------+------------+--------------+----------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM MEMBER
+    -> LIMIT 3;
++-----------+---------+-------------------+------------+
+| member_id | name    | email             | join_date  |
++-----------+---------+-------------------+------------+
+|        21 | Shankar | shankar@gmail.com | 2009-09-12 |
+|        22 | NAYANA  | nayana@gmail.com  | 2009-09-12 |
+|        23 | HEMANTH | hemanth@gmail.com | 2010-09-22 |
++-----------+---------+-------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM BOOK
+    -> WHERE BOOK_ID=102 AND B_PRICE=250;
++---------+------------+--------------+----------------+------------+---------+
+| book_id | book_title | author       | published_year | genre      | b_price |
++---------+------------+--------------+----------------+------------+---------+
+|     102 | PYTHON     | Jagdeshchari |           1996 | technology |     250 |
++---------+------------+--------------+----------------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM BOOK
+    -> WHERE BOOK_ID=102 OR B_PRICE=250;
++---------+------------+--------------+----------------+------------+---------+
+| book_id | book_title | author       | published_year | genre      | b_price |
++---------+------------+--------------+----------------+------------+---------+
+|     102 | PYTHON     | Jagdeshchari |           1996 | technology |     250 |
++---------+------------+--------------+----------------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM BOOK
+    -> WHERE BOOK_ID=102 OR B_PRICE=200;
++---------+------------+--------------+----------------+------------+---------+
+| book_id | book_title | author       | published_year | genre      | b_price |
++---------+------------+--------------+----------------+------------+---------+
+|     101 | DBMS       | Leelavathi   |           1999 | technology |     200 |
+|     102 | PYTHON     | Jagdeshchari |           1996 | technology |     250 |
++---------+------------+--------------+----------------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BOOK
+    -> WHERE BOOK_ID=102 AND B_PRICE=200;
+Empty set (0.00 sec)
+
